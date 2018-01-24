@@ -16,7 +16,7 @@ export default class Player {
   }
 
   loadVideo() {
-    const video = new Video(this.options.src, true, this.options.loop);
+    const video = new Video(this.options.src, true, this.options.loop === 'true');
     this.player.appendChild(video.render());
   }
 
@@ -27,7 +27,7 @@ export default class Player {
     this.player.setAttribute('class', 'raw-player');
     this.player.style = `width:${this.targetWidth}px;height:${this.targetHeight}px;`;
 
-    if (this.options.autoPlay) {
+    if (this.options.autoPlay === 'true') {
       self.loadVideo();
     } else {
       const posterOverlay = new PosterOverlay(this.options.poster);

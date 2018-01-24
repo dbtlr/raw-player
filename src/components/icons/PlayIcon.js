@@ -1,42 +1,25 @@
 
-export default class PlayIcon {
-  render() {
-    const icon = document.createElement('div');
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const title = document.createElement('title');
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');;
+import Icon from './Icon';
 
-    svg.setAttribute('version', '1.1');
-    svg.setAttribute('viewBox', '0 0 20 20');
-
-    icon.setAttribute('class', 'rp__icon rp__play-icon');
-    title.setAttribute('class', 'rp__screen-reader-text');
-    title.innerHtml = 'Play Video';
-
-    path.setAttribute('d', 'M5 4l10 6-10 6v-12z');
-
-    svg.appendChild(title);
-    svg.appendChild(path);
-    icon.appendChild(svg);
-
-    icon.addEventListener('click', this.handleClick.bind(this));
-
-    this.elem = icon;
-
-    return icon;
+/**
+ * This Icon was borrowed from the FontAwesome 5 free collection
+ *
+ * The original can be found here: https://fontawesome.com/icons/play?style=solid
+ */
+export default class PlayIcon extends Icon {
+  getIconName() {
+    return 'play-icon';
   }
 
-  remove() {
-    this.elem.remove();
+  getScreenReaderText() {
+    return 'Play Video';
   }
 
-  onClick(func) {
-    this.onClickEvent = func;
+  getSvgPath() {
+    return 'M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z';
   }
 
-  handleClick() {
-    if (typeof this.onClickEvent === 'function') {
-      this['onClickEvent']();
-    }
+  getViewBox() {
+    return '0 0 448 512';
   }
 }

@@ -1,42 +1,25 @@
 
-export default class PauseIcon {
-  render() {
-    const icon = document.createElement('div');
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const title = document.createElement('title');
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');;
+import Icon from './Icon';
 
-    svg.setAttribute('version', '1.1');
-    svg.setAttribute('viewBox', '0 0 20 20');
-
-    icon.setAttribute('class', 'rp__icon rp__pause-icon');
-    title.setAttribute('class', 'rp__screen-reader-text');
-    title.innerHtml = 'Pause Video';
-
-    path.setAttribute('d', 'M5 16v-12h3v12h-3zM12 4h3v12h-3v-12z');
-
-    svg.appendChild(title);
-    svg.appendChild(path);
-    icon.appendChild(svg);
-
-    icon.addEventListener('click', this.handleClick.bind(this));
-
-    this.elem = icon;
-
-    return icon;
+/**
+ * This Icon was borrowed from the FontAwesome 5 free collection
+ *
+ * The original can be found here: https://fontawesome.com/icons/pause?style=solid
+ */
+export default class PauseIcon extends Icon {
+  getIconName() {
+    return 'pause-icon';
   }
 
-  remove() {
-    this.elem.remove();
+  getScreenReaderText() {
+    return 'Pause Video';
   }
 
-  onClick(func) {
-    this.onClickEvent = func;
+  getSvgPath() {
+    return 'M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z';
   }
 
-  handleClick() {
-    if (typeof this.onClickonClickEvent === 'function') {
-      this['onClickEvent']();
-    }
+  getViewBox() {
+    return '0 0 448 512';
   }
 }
