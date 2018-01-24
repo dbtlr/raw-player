@@ -7,12 +7,16 @@ export default class Player {
     this.targetWidth = this.target.parentElement.offsetWidth;
     this.targetHeight = this.targetWidth * (9 / 16);
 
+    console.log(target);
+
     this.options = {
       autoPlay: target.autoplay || false,
       loop: target.loop || false,
       src: target.src || '',
       poster: target.poster || '',
     };
+
+    console.log(this.options);
   }
 
   loadVideo() {

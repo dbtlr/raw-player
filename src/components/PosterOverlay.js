@@ -12,7 +12,7 @@ export default class PosterOverlay {
     const icon = new PlayIcon();
 
     this.poster.setAttribute('class', 'rp__poster');
-    overlay.setAttribute('class', 'rp__poster-overlay');
+    overlay.setAttribute('class', 'rp__poster-bg');
 
     this.poster.style = `background-image:url(${this.src})`;
 
