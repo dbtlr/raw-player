@@ -101,10 +101,40 @@
 }
 
 .raw-player .rp__player-controls {
+  display: flex;
   position: absolute;
+  cursor: default;
   bottom: 0;
-  right: 0;
-  left: 0;
-  height: 28px;
-  color: #fff;
+  width: 100%;
+  height: 38px;
+  /* transform: translateY(100%) translateY(1px);
+  transition: all .3s; */
+  flex-wrap: wrap;
+  background-color: rgba(255,255,255,0.9);
+  box-shadow: 1px -1px 1px #333;
+  z-index: 2;
+  padding: 0 5px;
+}
+
+.raw-player:hover .rp__player-controls {
+  /* transform: translateY(0); */
+}
+
+.raw-player .rp__play-toggle {
+  width: 35px;
+  padding: 7px;
+  transition: fill 300ms ease-out;
+}
+
+.raw-player .rp__icon {
+  cursor: pointer;
+}
+
+.raw-player .rp__play-toggle path {
+  fill: #666;
+}
+
+.raw-player .rp__play-toggle:hover path,
+.raw-player .rp__play-toggle:focus path {
+  fill: #94E8B4;
 }

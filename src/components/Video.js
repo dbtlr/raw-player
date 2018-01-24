@@ -7,25 +7,28 @@ export default class Video {
     this.src = src;
     this.autoPlay = autoPlay;
     this.loop = loop;
+    this.elem = document.createElement('video');
   }
 
   getVideo() {
-    const video = document.createElement('video');
-
-    video.src = this.src;
-    video.style = 'background:transparent;max-width:100%;max-height:100%';
+    this.elem.src = this.src;
+    this.elem.style = 'background:transparent;max-width:100%;max-height:100%';
     if (this.loop) {
-      video.loop = "true";
+      this.elem.loop = true;
     }
 
+    this.elem.addEventListener('loadedmetadata', () => {
+      const toolbar = new Toolbar(this);
+      this.container.appendChild(toolbar.render());
 
-    video.addEventListener('loadedmetadata', () => {
       if (this.autoPlay) {
-        video.play();
+        this.elem.play();
+      } else {
+        this.showPauseOverlay();
       }
     });
 
-    return video;
+    return this.elem;
   }
 
   getOverlay() {
@@ -41,21 +44,29 @@ export default class Video {
     return this.overlay;
   }
 
+  showPauseOverlay() {
+    this.container.setAttribute('class', 'rp__video');
+
+    if (typeof this.playIcon === 'object') {
+      this.playIcon.remove();
+    }
+  }
+
+  hidePauseOverlay() {
+    this.container.setAttribute('class', 'rp__video paused');
+
+    this.playIcon = new PlayIcon();
+    this.overlay.appendChild(this.playIcon.render());
+  }
+
   togglePlay() {
     if (this.video.paused) {
       this.video.play();
-      this.container.setAttribute('class', 'rp__video');
-
-      if (typeof this.playIcon === 'object') {
-        this.playIcon.remove();
-      }
+      this.showPauseOverlay();
 
     } else {
       this.video.pause();
-      this.container.setAttribute('class', 'rp__video paused');
-
-      this.playIcon = new PlayIcon();
-      this.overlay.appendChild(this.playIcon.render());
+      this.hidePauseOverlay();
     }
   }
 
@@ -69,9 +80,6 @@ export default class Video {
 
     this.container.appendChild(this.video);
     this.container.appendChild(this.overlay);
-
-    const toolbar = new Toolbar();
-    this.container.appendChild(toolbar.render());
 
     return this.container;
   }

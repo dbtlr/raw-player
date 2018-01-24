@@ -27,7 +27,7 @@ export default class Player {
     this.player.setAttribute('class', 'raw-player');
     this.player.style = `width:${this.targetWidth}px;height:${this.targetHeight}px;`;
 
-    if (this.options.autoPlay === 'true') {
+    if (this.options.autoPlay === true) {
       self.loadVideo();
     } else {
       const posterOverlay = new PosterOverlay(this.options.poster);

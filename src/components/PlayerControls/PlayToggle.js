@@ -1,29 +1,48 @@
 
+import PlayIcon from '../icons/PlayIcon';
+import PauseIcon from '../icons/PauseIcon';
+
 export default class PlayToggle {
+  constructor(video) {
+    this.video = video;
+  }
+
+  setButton(icon) {
+    icon.onClick(this.handleClick.bind(this));
+    this.button = icon.render();
+
+    while (this.toggle.firstChild) {
+      this.toggle.removeChild(this.toggle.firstChild);
+    }
+
+    this.toggle.appendChild(this.button);
+  }
+
   render() {
-    const toggle = document.createElement('div');
-    const svg = document.createElement('svg');
-    const title = document.createElement('title');
-    const path = document.createElement('path');
+    this.toggle = document.createElement('div');
+    this.setButton(new PlayIcon());
 
-    toggle.setAttribute('class', 'rp_play-toggle');
+    this.toggle.setAttribute('class', 'rp__play-toggle');
 
-    svg.setAttribute('version', '1.1');
-    svg.setAttribute('width', '20');
-    svg.setAttribute('height', '20');
-    svg.setAttribute('viewBox', '0 0 20 20');
+    this.video.elem.addEventListener('playing', this.setPlaying.bind(this));
+    this.video.elem.addEventListener('pause', this.setPaused.bind(this));
 
-    title.setAttribute('class', 'rp__screen-reader-text');
-    title.innerHtml = 'Play Video';
+    return this.toggle;
+  }
 
-    path.setAttribute('d', 'M5 4l10 6-10 6v-12z');
+  setPlaying() {
+    this.setButton(new PauseIcon());
+  }
 
-    toggle.setAttribute('class', 'rp__play-overplay')
+  setPaused() {
+    this.setButton(new PlayIcon());
+  }
 
-    svg.appendChild(title);
-    svg.appendChild(path);
-    toggle.appendChild(svg);
+  onClick(func) {
+    this.onClickEvent = func;
+  }
 
-    return toggle;
+  handleClick() {
+    this.video.togglePlay();
   }
 }
