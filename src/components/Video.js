@@ -3,9 +3,10 @@ import Toolbar from './PlayerControls/Toolbar';
 import PlayIcon from './icons/PlayIcon';
 
 export default class Video {
-  constructor(src, autoPlay=false) {
+  constructor(src, autoPlay=false, loop=false) {
     this.src = src;
     this.autoPlay = autoPlay;
+    this.loop = loop;
   }
 
   getVideo() {
@@ -13,6 +14,10 @@ export default class Video {
 
     video.src = this.src;
     video.style = 'background:transparent;max-width:100%;max-height:100%';
+    if (this.loop) {
+      video.loop = "true";
+    }
+
 
     video.addEventListener('loadedmetadata', () => {
       if (this.autoPlay) {
