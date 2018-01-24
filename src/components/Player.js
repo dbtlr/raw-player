@@ -7,7 +7,7 @@ export default class Player {
     this.targetWidth = this.target.parentElement.offsetWidth;
     this.targetHeight = this.targetWidth * (9 / 16);
 
-    this.autoPlay = true;
+    this.autoPlay = false;
     this.loop = false;
     this.src = target.src;
     this.poster = target.poster || '';
