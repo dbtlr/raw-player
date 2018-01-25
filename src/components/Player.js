@@ -36,7 +36,7 @@ export default class Player {
       posterOverlay.onClick(() => {
         self.loadVideo();
         this.video.elem.addEventListener('canplay', () => {
-          posterOverlay.poster.remove();
+          posterOverlay.remove();
           this.video.elem.play();
         });
       });

@@ -1,39 +1,26 @@
 
+import Element from './Element';
+import PlayOverlay from './PlayOverlay';
 import PlayIcon from './icons/PlayIcon';
 import SpinnerIcon from './icons/SpinnerIcon';
 
-export default class PosterOverlay {
+export default class PosterOverlay extends Element {
   constructor(src) {
+    super();
     this.src = src;
   }
 
-  render() {
-    this.poster = document.createElement('div');
-    const overlay = document.createElement('div');
-    this.button = new PlayIcon();
+  renderElement() {
+    const poster = document.createElement('div');
+    const overlay = new PlayOverlay();
 
-    this.poster.setAttribute('class', 'rp__poster');
-    overlay.setAttribute('class', 'rp__poster-bg');
+    poster.setAttribute('class', 'rp__poster');
 
-    this.poster.style = `background-image:url(${this.src})`;
+    poster.style = `background-image:url(${this.src})`;
 
-    this.button.onClick(this.handleClick.bind(this));
+    overlay.onClick(this.handleClick.bind(this));
+    poster.appendChild(overlay.render());
 
-    this.poster.appendChild(overlay);
-    this.poster.appendChild(this.button.render());
-
-    return this.poster;
-  }
-
-  onClick(func) {
-    this.onClickEvent = func;
-  }
-
-  handleClick() {
-    if (typeof this.onClickEvent === 'function') {
-      const spinner = new SpinnerIcon();
-      this.button.elem.replaceWith(spinner.render());
-      this['onClickEvent']();
-    }
+    return poster;
   }
 }

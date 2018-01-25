@@ -1,6 +1,8 @@
 
-export default class Progress {
-  render() {
+import Element from '../Element';
+
+export default class Progress extends Element {
+  renderElement() {
     const controls = document.createElement('div');
     controls.setAttribute('class', 'rp__controls-progress');
 

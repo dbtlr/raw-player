@@ -1,9 +1,11 @@
 
+import Element from './Element';
 import Toolbar from './PlayerControls/Toolbar';
 import PlayIcon from './icons/PlayIcon';
 
-export default class Video {
+export default class Video extends Element {
   constructor(src, autoPlay=false, loop=false) {
+    super();
     this.src = src;
     this.autoPlay = autoPlay;
     this.loop = loop;

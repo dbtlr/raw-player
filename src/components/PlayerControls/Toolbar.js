@@ -1,12 +1,15 @@
+
+import Element from '../Element';
 import Progress from './Progress';
 import PlayToggle from './PlayToggle';
 
-export default class Toolbar {
+export default class Toolbar extends Element {
   constructor(video) {
+    super();
     this.video = video;
   }
 
-  render() {
+  renderElement() {
     const video = this.video;
     const controls = document.createElement('div');
     controls.setAttribute('class', 'rp__player-controls');

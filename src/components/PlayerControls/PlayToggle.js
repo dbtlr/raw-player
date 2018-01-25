@@ -1,9 +1,11 @@
 
+import Element from '../Element';
 import PlayIcon from '../icons/PlayIcon';
 import PauseIcon from '../icons/PauseIcon';
 
-export default class PlayToggle {
+export default class PlayToggle extends Element {
   constructor(video) {
+    super();
     this.video = video;
   }
 
@@ -11,23 +13,23 @@ export default class PlayToggle {
     icon.onClick(this.handleClick.bind(this));
     this.button = icon.render();
 
-    while (this.toggle.firstChild) {
-      this.toggle.removeChild(this.toggle.firstChild);
+    while (this.elem.firstChild) {
+      this.elem.removeChild(this.elem.firstChild);
     }
 
-    this.toggle.appendChild(this.button);
+    this.elem.appendChild(this.button);
   }
 
-  render() {
-    this.toggle = document.createElement('div');
+  renderElement() {
+    this.elem = document.createElement('div');
     this.setButton(new PlayIcon());
 
-    this.toggle.setAttribute('class', 'rp__play-toggle');
+    this.elem.setAttribute('class', 'rp__play-toggle');
 
     this.video.elem.addEventListener('playing', this.setPlaying.bind(this));
     this.video.elem.addEventListener('pause', this.setPaused.bind(this));
 
-    return this.toggle;
+    return this.elem;
   }
 
   setPlaying() {
@@ -38,11 +40,7 @@ export default class PlayToggle {
     this.setButton(new PlayIcon());
   }
 
-  onClick(func) {
-    this.onClickEvent = func;
-  }
-
-  handleClick() {
+  afterOnClick() {
     this.video.togglePlay();
   }
 }
