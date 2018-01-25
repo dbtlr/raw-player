@@ -1,5 +1,6 @@
 
 import PlayIcon from './icons/PlayIcon';
+import SpinnerIcon from './icons/SpinnerIcon';
 
 export default class PosterOverlay {
   constructor(src) {
@@ -9,17 +10,17 @@ export default class PosterOverlay {
   render() {
     this.poster = document.createElement('div');
     const overlay = document.createElement('div');
-    const icon = new PlayIcon();
+    this.button = new PlayIcon();
 
     this.poster.setAttribute('class', 'rp__poster');
     overlay.setAttribute('class', 'rp__poster-bg');
 
     this.poster.style = `background-image:url(${this.src})`;
 
-    icon.onClick(this.handleClick.bind(this));
+    this.button.onClick(this.handleClick.bind(this));
 
     this.poster.appendChild(overlay);
-    this.poster.appendChild(icon.render());
+    this.poster.appendChild(this.button.render());
 
     return this.poster;
   }
@@ -29,8 +30,9 @@ export default class PosterOverlay {
   }
 
   handleClick() {
-    this.poster.remove();
     if (typeof this.onClickEvent === 'function') {
+      const spinner = new SpinnerIcon();
+      this.button.elem.replaceWith(spinner.render());
       this['onClickEvent']();
     }
   }

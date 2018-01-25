@@ -7,21 +7,17 @@ export default class Player {
     this.targetWidth = this.target.parentElement.offsetWidth;
     this.targetHeight = this.targetWidth * (9 / 16);
 
-    console.log(target);
-
     this.options = {
       autoPlay: target.autoplay || false,
       loop: target.loop || false,
       src: target.src || '',
       poster: target.poster || '',
     };
-
-    console.log(this.options);
   }
 
   loadVideo() {
-    const video = new Video(this.options.src, true, this.options.loop === 'true');
-    this.player.appendChild(video.render());
+    this.video = new Video(this.options.src, false, this.options.loop === 'true');
+    this.player.appendChild(this.video.render());
   }
 
   render() {
@@ -39,6 +35,10 @@ export default class Player {
 
       posterOverlay.onClick(() => {
         self.loadVideo();
+        this.video.elem.addEventListener('canplay', () => {
+          posterOverlay.poster.remove();
+          this.video.elem.play();
+        });
       });
     }
 

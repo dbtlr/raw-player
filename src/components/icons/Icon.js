@@ -1,5 +1,9 @@
 
 export default class Icon {
+  constructer() {
+
+  }
+
   getIconName() {
     return 'default-icon';
   }
