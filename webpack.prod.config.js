@@ -1,7 +1,6 @@
 
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Constant with our paths
 const paths = {
@@ -14,15 +13,8 @@ module.exports = {
   entry: path.join(paths.src, 'index.js'),
   output: {
     path: paths.dist,
-    filename: 'player.js'
+    filename: 'player.min.js'
   },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(paths.src, 'index.html'),
-    }),
-    new ExtractTextPlugin('player.css'),
-  ],
 
   module: {
     rules: [
@@ -35,9 +27,9 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
-        }),
+        use: [
+          'css-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -47,6 +39,10 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new UglifyJsPlugin()
+  ],
 
   resolve: {
     extensions: ['.js'],

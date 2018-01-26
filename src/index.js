@@ -1,6 +1,5 @@
 
 import Player from './components/Player';
-import './player.css';
 
 const players = document.querySelectorAll('.raw-player');
 
