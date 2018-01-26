@@ -30,7 +30,13 @@ export default class Progress extends Element {
     this.progressBar.setAttribute('class', 'rp__controls-progress__filled');
 
     this.progress.appendChild(this.progressBar);
-    this.progress.addEventListener('click', this.handleScrub.bind(this  ));
+
+    let mousedown = false;
+
+    this.progress.addEventListener('click', this.handleScrub.bind(this));
+    this.progress.addEventListener('mousemove', (e) => mousedown && this.handleScrub(e));
+    this.progress.addEventListener('mousedown', () => mousedown = true);
+    this.progress.addEventListener('mouseup', () => mousedown = false);
 
     return this.progress;
   }
