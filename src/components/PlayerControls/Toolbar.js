@@ -3,6 +3,7 @@ import Element from '../Element';
 import Progress from './Progress';
 import PlayToggle from './PlayToggle';
 import FullScreenToggle from './FullScreenToggle';
+import VolumeKnob from './VolumeKnob';
 import TimeIndicator from './TimeIndicator';
 
 export default class Toolbar extends Element {
@@ -23,6 +24,9 @@ export default class Toolbar extends Element {
 
     const playToggle = new PlayToggle(this.video);
     controls.appendChild(playToggle.render());
+
+    const volumeKnob = new VolumeKnob(this.video);
+    controls.appendChild(volumeKnob.render());
 
     const timeIndicator = new TimeIndicator(this.video);
     controls.appendChild(timeIndicator.render());

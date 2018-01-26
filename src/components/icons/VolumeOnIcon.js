@@ -6,9 +6,9 @@ import Icon from './Icon';
  *
  * The original can be found here: https://fontawesome.com/icons/volume-up?style=solid
  */
-export default class VolumeIcon extends Icon {
+export default class VolumeOnIcon extends Icon {
   getIconName() {
-    return 'volume-icon';
+    return 'volume-on-icon';
   }
 
   getScreenReaderText() {
@@ -20,6 +20,6 @@ export default class VolumeIcon extends Icon {
   }
 
   getViewBox() {
-    return '0 0 448 512';
+    return '0 0 576 512';
   }
 }
