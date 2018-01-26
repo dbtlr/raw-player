@@ -16,23 +16,32 @@ export default class Toolbar extends Element {
     const video = this.video;
     const toolbar = document.createElement('div');
     const controls = document.createElement('div');
+    const left = document.createElement('div');
+    const right = document.createElement('div');
+
     toolbar.setAttribute('class', 'rp__toolbar');
     controls.setAttribute('class', 'rp__controls');
+    left.setAttribute('class', 'rp__controls__left');
+    right.setAttribute('class', 'rp__controls__right');
 
     const progress = new Progress(this.video);
     toolbar.appendChild(progress.render());
 
+    controls.appendChild(left);
+
     const playToggle = new PlayToggle(this.video);
-    controls.appendChild(playToggle.render());
+    left.appendChild(playToggle.render());
 
     const volumeKnob = new VolumeKnob(this.video);
-    controls.appendChild(volumeKnob.render());
+    left.appendChild(volumeKnob.render());
 
     const timeIndicator = new TimeIndicator(this.video);
     controls.appendChild(timeIndicator.render());
 
     const expandToggle = new FullScreenToggle(this.video);
-    controls.appendChild(expandToggle.render());
+    right.appendChild(expandToggle.render());
+
+    controls.appendChild(right);
 
     toolbar.appendChild(controls);
 

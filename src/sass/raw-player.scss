@@ -117,13 +117,30 @@ $highlight: #94E8B4;
 
   .rp__controls {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     height: 38px;
     width: 100%;
     padding: 0 10px;
 
     & > * {
       flex:1;
+    }
+
+    .rp__controls__left {
+      display: flex;
+
+      & > * {
+        flex: 1;
+      }
+    }
+
+    .rp__controls__right {
+      display: flex;
+
+      & > * {
+        flex: 1;
+        margin-left: auto;
+      }
     }
   }
 
@@ -161,7 +178,7 @@ $highlight: #94E8B4;
   }
 
   .rp__button-fs {
-    margin-left: auto;
+
   }
 
   .rp__button-volume {
