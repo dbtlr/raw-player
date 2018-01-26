@@ -1,4 +1,4 @@
-import PosterOverlay from './PosterOverlay';
+import Poster from './Poster';
 import Video from './Video';
 
 export default class Player {
@@ -30,13 +30,13 @@ export default class Player {
     if (this.options.autoPlay === true) {
       self.loadVideo();
     } else {
-      const posterOverlay = new PosterOverlay(this.options.poster);
-      this.player.appendChild(posterOverlay.render());
+      const poster = new Poster(this.options.poster);
+      this.player.appendChild(poster.render());
 
-      posterOverlay.onClick(() => {
+      poster.onClick(() => {
         self.loadVideo();
         this.video.elem.addEventListener('canplay', () => {
-          posterOverlay.remove();
+          poster.remove();
           this.video.elem.play();
         });
       });

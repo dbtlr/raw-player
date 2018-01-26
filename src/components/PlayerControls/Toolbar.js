@@ -14,7 +14,7 @@ export default class Toolbar extends Element {
     const controls = document.createElement('div');
     controls.setAttribute('class', 'rp__player-controls');
 
-    const progress = new Progress();
+    const progress = new Progress(this.video);
     controls.appendChild(progress.render());
 
     const playToggle = new PlayToggle(this.video);

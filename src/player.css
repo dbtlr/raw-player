@@ -120,7 +120,10 @@
   background-color: rgba(255,255,255,0.9);
   box-shadow: 1px -1px 1px #333;
   z-index: 2;
-  padding: 0 5px;
+}
+
+.raw-player .rp__player-controls > * {
+  flex:1;
 }
 
 .raw-player:hover .rp__player-controls,
@@ -128,8 +131,32 @@
   transform: translateY(0);
 }
 
+
+.raw-player:hover .rp__player-controls-progress {
+  height:15px;
+}
+
+.raw-player .rp__controls-progress {
+  flex:10;
+  position: relative;
+  display:flex;
+  flex-basis:100%;
+  margin-top: -5px;
+  height:5px;
+  transition:height 0.3s;
+  background:rgba(0,0,0,0.5);
+  cursor:ew-resize;
+}
+
+.raw-player .rp__controls-progress__filled {
+  width:50%;
+  background:#94E8B4;
+  flex:0;
+  flex-basis:0%;
+}
+
 .raw-player .rp__play-toggle {
-  width: 35px;
+  max-width: 35px;
   padding: 7px;
   transition: fill 300ms ease-out;
 }
