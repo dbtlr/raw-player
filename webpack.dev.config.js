@@ -5,24 +5,19 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Constant with our paths
 const paths = {
-  dist: path.resolve(__dirname, 'dist'),
   src: path.resolve(__dirname, 'src'),
   demo: path.resolve(__dirname, 'demo'),
 };
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.demo, 'player.js'),
-  output: {
-    path: paths.dist,
-    filename: 'player.js'
-  },
+  entry: path.join(paths.src, 'index.js'),
 
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(paths.demo, 'index.html'),
     }),
-    new ExtractTextPlugin('player.css'),
+    new ExtractTextPlugin('raw-player.css'),
   ],
 
   module: {
@@ -35,16 +30,10 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
-        }),
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader',
-        ],
+        test: /\.(css|sass|scss)$/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader'],
+        })
       },
     ],
   },

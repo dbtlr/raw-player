@@ -1,0 +1,200 @@
+$highlight: #94E8B4;
+
+.raw-player {
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #999;
+  overflow: hidden;
+
+  .rp__video {
+
+    &:fullscreen, &:-webkit-full-screen {
+      max-width: none;
+      width: 100%;
+    }
+  }
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+  }
+
+  .rp__video-overlay {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .rp__poster {
+    background-color: #fff;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    height: 100%;
+    width: 100%
+  }
+
+  .rp__screen-reader-text {
+    position: absolute;
+    left: -1000em;
+  }
+
+  .rp__poster-bg,
+  .paused .rp__video-overlay__bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,.6) 100%);
+    z-index: 1;
+    cursor: pointer;
+    transition: opacity 300ms ease-out;
+  }
+
+  &:hover .rp__poster-bg,
+  &:hover .rp__video.paused .rp__video-overlay__bg {
+    opacity: 0.8;
+  }
+
+  .rp__poster .rp__icon,
+  .rp__video.paused .rp__video-overlay .rp__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .rp__icon {
+    svg {
+      display: block;
+      margin: auto;
+      height: 100%;
+    }
+
+    path {
+      fill: #ffffff;
+    }
+  }
+
+  .rp__poster .rp__icon svg,
+  .rp__video .rp__video-overlay .rp__icon svg {
+    width: 80px;
+  }
+
+  .rp__video-overlay:hover .rp__icon path,
+  .rp__video-overlay:focus .rp__icon path,
+  .rp__poster:hover .rp__icon path,
+  .rp__poster:focus .rp__icon path {
+    fill: $highlight;
+  }
+
+  .rp__player-controls {
+    display: flex;
+    position: absolute;
+    cursor: default;
+    bottom: 0;
+    width: 100%;
+    height: 38px;
+    transform: translateY(100%) translateY(2px);
+    transition: all .3s;
+    flex-wrap: wrap;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 1px -1px 1px #333;
+    z-index: 2;
+
+    & > * {
+      flex:1;
+    }
+  }
+
+  &:hover .rp__player-controls,
+  .rp__video.paused .rp__player-controls {
+    transform: translateY(0);
+  }
+
+  &:hover .rp__player-controls-progress {
+    height:15px;
+  }
+
+  .rp__controls-progress {
+    flex:10;
+    position: relative;
+    display:flex;
+    flex-basis:100%;
+    margin-top: -5px;
+    height:5px;
+    transition:height 0.3s;
+    background:rgba(0,0,0,0.5);
+    cursor:ew-resize;
+  }
+
+  .rp__controls-progress__filled {
+    width:50%;
+    background: $highlight;
+    flex:0;
+    flex-basis:0%;
+  }
+
+  .rp__button-toggle {
+    max-width: 35px;
+    padding: 7px;
+    transition: fill 300ms ease-out;
+  }
+
+  .rp__button-fs {
+    margin-left: auto;
+  }
+
+  .rp__icon {
+    cursor: pointer;
+  }
+
+  .rp__spinner-icon {
+    -webkit-animation: rp-spin 2s infinite linear;
+    animation: rp-spin 2s infinite linear;
+  }
+
+  .rp__button-toggle path {
+    fill: #666;
+  }
+
+  .rp__button-toggle:hover path,
+  .rp__button-toggle:focus path {
+    fill: $highlight;
+  }
+}
+
+
+
+
+@-webkit-keyframes rp-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes rp-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
