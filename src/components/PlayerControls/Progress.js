@@ -9,6 +9,11 @@ export default class Progress extends Element {
     this.video.addEventListener('timeupdate', this.handleProgress.bind(this));
   }
 
+  handleScrub(e) {
+    const scrubTime = (e.offsetX / this.progress.offsetWidth) * this.video.duration;
+    this.video.currentTime = scrubTime;
+  }
+
   handleProgress() {
     const percent = (this.video.currentTime / this.video.duration) * 100;
 
@@ -18,14 +23,15 @@ export default class Progress extends Element {
   }
 
   renderElement() {
-    const controls = document.createElement('div');
-    controls.setAttribute('class', 'rp__controls-progress');
+    this.progress = document.createElement('div');
+    this.progress.setAttribute('class', 'rp__controls-progress');
 
     this.progressBar = document.createElement('div');
     this.progressBar.setAttribute('class', 'rp__controls-progress__filled');
 
-    controls.appendChild(this.progressBar);
+    this.progress.appendChild(this.progressBar);
+    this.progress.addEventListener('click', this.handleScrub.bind(this  ));
 
-    return controls;
+    return this.progress;
   }
 }
