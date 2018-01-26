@@ -24,10 +24,10 @@ export default class Progress extends Element {
 
   renderElement() {
     this.progress = document.createElement('div');
-    this.progress.setAttribute('class', 'rp__controls-progress');
+    this.progress.setAttribute('class', 'rp__progress');
 
     this.progressBar = document.createElement('div');
-    this.progressBar.setAttribute('class', 'rp__controls-progress__filled');
+    this.progressBar.setAttribute('class', 'rp__progress__filled');
 
     this.progress.appendChild(this.progressBar);
 
