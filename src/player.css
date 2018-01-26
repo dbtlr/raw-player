@@ -5,12 +5,12 @@
   overflow: hidden;
 }
 
-.raw-player:fullscreen {
+.raw-player .rp__video:fullscreen {
   max-width: none;
   width: 100%;
 }
 
-.raw-player:-webkit-full-screen {
+.raw-player .rp__video:-webkit-full-screen {
   max-width: none;
   width: 100%;
 }
@@ -155,10 +155,14 @@
   flex-basis:0%;
 }
 
-.raw-player .rp__play-toggle {
+.raw-player .rp__button-toggle {
   max-width: 35px;
   padding: 7px;
   transition: fill 300ms ease-out;
+}
+
+.raw-player .rp__button-fs {
+  margin-left: auto;
 }
 
 .raw-player .rp__icon {
@@ -186,11 +190,11 @@
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
 
-.raw-player .rp__play-toggle path {
+.raw-player .rp__button-toggle path {
   fill: #666;
 }
 
-.raw-player .rp__play-toggle:hover path,
-.raw-player .rp__play-toggle:focus path {
+.raw-player .rp__button-toggle:hover path,
+.raw-player .rp__button-toggle:focus path {
   fill: #94E8B4;
 }

@@ -2,6 +2,7 @@
 import Element from '../Element';
 import Progress from './Progress';
 import PlayToggle from './PlayToggle';
+import FullScreenToggle from './FullScreenToggle';
 
 export default class Toolbar extends Element {
   constructor(video) {
@@ -19,6 +20,9 @@ export default class Toolbar extends Element {
 
     const playToggle = new PlayToggle(this.video);
     controls.appendChild(playToggle.render());
+
+    const expandToggle = new FullScreenToggle(this.video);
+    controls.appendChild(expandToggle.render());
 
     return controls;
   }

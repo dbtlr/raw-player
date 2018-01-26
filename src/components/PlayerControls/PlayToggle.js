@@ -24,10 +24,10 @@ export default class PlayToggle extends Element {
     this.elem = document.createElement('div');
     this.setButton(new PlayIcon());
 
-    this.elem.setAttribute('class', 'rp__play-toggle');
+    this.elem.setAttribute('class', 'rp__button-toggle rp__button-play');
 
-    this.video.elem.addEventListener('playing', this.setPlaying.bind(this));
-    this.video.elem.addEventListener('pause', this.setPaused.bind(this));
+    this.video.getVideo().addEventListener('playing', this.setPlaying.bind(this));
+    this.video.getVideo().addEventListener('pause', this.setPaused.bind(this));
 
     return this.elem;
   }

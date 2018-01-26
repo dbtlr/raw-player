@@ -9,28 +9,31 @@ export default class Video extends Element {
     this.src = src;
     this.autoPlay = autoPlay;
     this.loop = loop;
-    this.elem = document.createElement('video');
   }
 
   getVideo() {
-    this.elem.src = this.src;
-    this.elem.style = 'background:transparent;max-width:100%;max-height:100%';
-    if (this.loop) {
-      this.elem.loop = true;
+    if (typeof this.video === 'undefined') {
+      this.video = document.createElement('video');
+      this.video.src = this.src;
+      this.video.controle = false;
+      this.video.style = 'background:transparent;max-width:100%;max-height:100%';
+      if (this.loop) {
+        this.video.loop = true;
+      }
+
+      this.video.addEventListener('loadedmetadata', () => {
+        const toolbar = new Toolbar(this);
+        this.container.appendChild(toolbar.render());
+
+        if (this.autoPlay) {
+          this.video.play();
+        } else {
+          this.showPauseOverlay();
+        }
+      });
     }
 
-    this.elem.addEventListener('loadedmetadata', () => {
-      const toolbar = new Toolbar(this);
-      this.container.appendChild(toolbar.render());
-
-      if (this.autoPlay) {
-        this.elem.play();
-      } else {
-        this.showPauseOverlay();
-      }
-    });
-
-    return this.elem;
+    return this.video;
   }
 
   getOverlay() {
@@ -72,16 +75,13 @@ export default class Video extends Element {
     }
   }
 
-  render() {
+  renderElement() {
     this.container = document.createElement('div');
-
-    this.overlay = this.getOverlay();
-    this.video   = this.getVideo();
 
     this.container.setAttribute('class', 'rp__video');
 
-    this.container.appendChild(this.video);
-    this.container.appendChild(this.overlay);
+    this.container.appendChild(this.getVideo());
+    this.container.appendChild(this.getOverlay());
 
     return this.container;
   }

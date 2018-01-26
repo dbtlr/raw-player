@@ -4,13 +4,13 @@ import Element from '../Element';
 export default class Progress extends Element {
   constructor(video) {
     super();
-    this.video = video;
+    this.video = video.getVideo();
 
-    this.video.elem.addEventListener('timeupdate', this.handleProgress.bind(this));
+    this.video.addEventListener('timeupdate', this.handleProgress.bind(this));
   }
 
   handleProgress() {
-    const percent = (this.video.elem.currentTime / this.video.elem.duration) * 100;
+    const percent = (this.video.currentTime / this.video.duration) * 100;
 
     if (typeof this.progressBar !== 'undefined') {
       this.progressBar.style.flexBasis = `${percent}%`;
