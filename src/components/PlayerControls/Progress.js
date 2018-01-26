@@ -7,6 +7,7 @@ export default class Progress extends Element {
     this.video = video.getVideo();
 
     this.video.addEventListener('timeupdate', this.handleProgress.bind(this));
+    this.video.addEventListener('progress', this.handleLoaded.bind(this));
   }
 
   handleScrub(e) {
@@ -18,7 +19,15 @@ export default class Progress extends Element {
     const percent = (this.video.currentTime / this.video.duration) * 100;
 
     if (typeof this.progressBar !== 'undefined') {
-      this.progressBar.style.flexBasis = `${percent}%`;
+      this.progressBar.style.width = `${percent}%`;
+    }
+  }
+
+  handleLoaded(e) {
+    const percent = (e.target.buffered.end(0) / this.video.duration) * 100;
+
+    if (typeof this.loadedBar !== 'undefined') {
+      this.loadedBar.style.width = `${percent}%`;
     }
   }
 
@@ -27,8 +36,12 @@ export default class Progress extends Element {
     this.progress.setAttribute('class', 'rp__progress');
 
     this.progressBar = document.createElement('div');
-    this.progressBar.setAttribute('class', 'rp__progress__filled');
+    this.progressBar.setAttribute('class', 'rp__progress__watched');
 
+    this.loadedBar = document.createElement('div');
+    this.loadedBar.setAttribute('class', 'rp__progress__loaded');
+
+    this.progress.appendChild(this.loadedBar);
     this.progress.appendChild(this.progressBar);
 
     let mousedown = false;

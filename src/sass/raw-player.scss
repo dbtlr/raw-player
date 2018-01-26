@@ -156,19 +156,30 @@ $highlight: #94E8B4;
   .rp__progress {
     flex:10;
     position: relative;
-    display:flex;
-    flex-basis: 100%;
     height: 5px;
     transition:height 0.3s;
     background:rgba(0,0,0,0.5);
     cursor:ew-resize;
   }
 
-  .rp__progress__filled {
-    width:50%;
+  .rp__progress__watched {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
     background: $highlight;
-    flex:0;
-    flex-basis:0%;
+    z-index: 2;
+  }
+
+  .rp__progress__loaded {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: #666;
+    z-index: 1;
   }
 
   .rp__button-toggle {
