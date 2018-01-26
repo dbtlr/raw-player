@@ -31,6 +31,9 @@ export default class Video extends Element {
           this.showPauseOverlay();
         }
       });
+
+      this.video.addEventListener('play', this.hidePauseOverlay.bind(this));
+      this.video.addEventListener('pause', this.showPauseOverlay.bind(this));
     }
 
     return this.video;
@@ -49,7 +52,7 @@ export default class Video extends Element {
     return this.overlay;
   }
 
-  showPauseOverlay() {
+  hidePauseOverlay() {
     this.container.setAttribute('class', 'rp__video');
 
     if (typeof this.playIcon === 'object') {
@@ -57,7 +60,7 @@ export default class Video extends Element {
     }
   }
 
-  hidePauseOverlay() {
+  showPauseOverlay() {
     this.container.setAttribute('class', 'rp__video paused');
 
     this.playIcon = new PlayIcon();
@@ -67,11 +70,9 @@ export default class Video extends Element {
   togglePlay() {
     if (this.video.paused) {
       this.video.play();
-      this.showPauseOverlay();
 
     } else {
       this.video.pause();
-      this.hidePauseOverlay();
     }
   }
 
